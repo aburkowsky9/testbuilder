@@ -7,6 +7,7 @@
 // other places in this file where you'll replace the FILL_ME_IN with a
 // different value.
 var FILL_ME_IN = 'Fill this value in';
+
  
  describe('Introduction to Mocha Tests - READ ME FIRST', function() {
   // A Mocha test is just a function!
@@ -309,5 +310,123 @@ describe('Maestro', function() {
   });
 });
 
-describe('should support China UnionPay')
-describe('should support Switch')
+describe('should support China UnionPay', function() {
+  // China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288 and a length of 16-19.
+  var expect = chai.expect;
+
+  for (prefix = 624; prefix <= 626; prefix++) {  
+    (function(prefix) {    
+
+      it('has a prefix of ' + prefix + ' and a length of 16', function() {
+        expect(detectNetwork(prefix + '4567890123456')).to.equal('China UnionPay');
+      }); 
+
+      it('has a prefix of ' + prefix + ' and a length of 17', function() {
+        expect(detectNetwork(prefix + '45678901234567')).to.equal('China UnionPay');
+      }); 
+
+      it('has a prefix of ' + prefix + ' and a length of 18', function() {
+        expect(detectNetwork(prefix + '456789012345678')).to.equal('China UnionPay');
+      });  
+
+      it('has a prefix of ' + prefix + ' and a length of 19', function() {
+        expect(detectNetwork(prefix + '4567890123456789')).to.equal('China UnionPay');
+      });  
+
+    })(prefix);
+  }
+
+  for (prefix = 6282; prefix <= 6288; prefix++) {  
+    (function(prefix) {    
+
+      it('has a prefix of ' + prefix + ' and a length of 16', function() {
+        expect(detectNetwork(prefix + '567890123456')).to.equal('China UnionPay');
+      }); 
+
+      it('has a prefix of ' + prefix + ' and a length of 17', function() {
+        expect(detectNetwork(prefix + '5678901234567')).to.equal('China UnionPay');
+      }); 
+
+      it('has a prefix of ' + prefix + ' and a length of 18', function() {
+        expect(detectNetwork(prefix + '56789012345678')).to.equal('China UnionPay');
+      });  
+
+      it('has a prefix of ' + prefix + ' and a length of 19', function() {
+        expect(detectNetwork(prefix + '567890123456789')).to.equal('China UnionPay');
+      });  
+
+    })(prefix);
+  }
+
+  for (prefix = 622126; prefix <= 622925; prefix++) {  
+    (function(prefix) {    
+
+      it('has a prefix of ' + prefix + ' and a length of 16', function() {
+        expect(detectNetwork(prefix + '7890123456')).to.equal('China UnionPay');
+      }); 
+
+      it('has a prefix of ' + prefix + ' and a length of 17', function() {
+        expect(detectNetwork(prefix + '78901234567')).to.equal('China UnionPay');
+      }); 
+
+      it('has a prefix of ' + prefix + ' and a length of 18', function() {
+        expect(detectNetwork(prefix + '789012345678')).to.equal('China UnionPay');
+      });  
+
+      it('has a prefix of ' + prefix + ' and a length of 19', function() {
+        expect(detectNetwork(prefix + '7890123456789')).to.equal('China UnionPay');
+      });  
+
+    })(prefix);
+  }
+});
+
+describe('should support Switch', function() {
+  // Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 and a length of 16, 18, or 19. 
+  var expect = chai.expect;
+  var prefixArr4 = ['4903', '4905', '4911', '4936', '6333', '6759'];
+  var prefixArr6 = ['564182', '633110'];
+
+  for (var i = 0; i < prefixArr4.length; i++) {  
+    var prefix = prefixArr4[i];
+
+    (function(prefix) {    
+
+      it('has a prefix of ' + prefix + ' and a length of 16', function() {
+        expect(detectNetwork(prefix + '567890123456')).to.equal('Switch');
+      }); 
+
+      it('has a prefix of ' + prefix + ' and a length of 18', function() {
+        expect(detectNetwork(prefix + '56789012345678')).to.equal('Switch');
+      });  
+
+      it('has a prefix of ' + prefix + ' and a length of 19', function() {
+        expect(detectNetwork(prefix + '567890123456789')).to.equal('Switch');
+      });  
+
+    })(prefix);
+  }
+
+  for (var i = 0; i < prefixArr6.length; i++) {  
+    var prefix = prefixArr6[i];
+
+    (function(prefix) {    
+
+      it('has a prefix of ' + prefix + ' and a length of 16', function() {
+        expect(detectNetwork(prefix + '7890123456')).to.equal('Switch');
+      }); 
+
+      it('has a prefix of ' + prefix + ' and a length of 18', function() {
+        expect(detectNetwork(prefix + '789012345678')).to.equal('Switch');
+      });  
+
+      it('has a prefix of ' + prefix + ' and a length of 19', function() {
+        expect(detectNetwork(prefix + '7890123456789')).to.equal('Switch');
+      });  
+
+    })(prefix);
+  }
+
+});
+
+
